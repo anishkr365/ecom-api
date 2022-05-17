@@ -1,0 +1,19 @@
+GET http://localhost:8000/v1/products
+
+### POST http://localhost:8000/v1/products/create Content-Type: application/x-www-form-urlencoded
+
+name= Tshirts &quantity=100
+
+### DELETE http://localhost:8000/v1/products/622b61cc61442709d4ef85ed
+
+### POST http://localhost:8000/v1/products/622b61cc61442709d4ef85ed/update_quantity/?number=100
+
+### **** DEPLYMENT TEST ******* GET https://ecommerce-api-ready.herokuapp.com//v1/products
+
+### POST https://ecommerce-api-ready.herokuapp.com/v1/products/create Content-Type: application/x-www-form-urlencoded
+
+name=key &quantity=50
+
+### DELETE https://ecommerce-api-ready.herokuapp.com/v1/products/622b61cc61442709d4ef85ed
+
+### POST https://ecommerce-api-ready.herokuapp.com/v1/products/622b61cc61442709d4ef85ed/update_quantity/?number=100 HTTP/1.1
