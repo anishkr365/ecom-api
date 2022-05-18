@@ -40,31 +40,35 @@ module.exports.create = async(req,res) => {
 }
 
 
-// Update product
-module.exports.update = async (req, res) => {
-    try {
-        const product = {
-            id:product.id,
-            name:product.name,
-            quantity:product.quantity
-        };
-    
-        const updatedProduct = await Product.findByIdAndUpdate(
-          { _id: req.params.productId },
-          product
-        );
-        res.json(updatedProduct);
-      } catch (error) {
-        res.json({ message: error });
-      }
-};
 
-// Delete product
-module.exports.delete = async (req, res) => {
-    try {
-        const removeProduct = await Product.findByIdAndDelete(req.params.productId);
-        res.json(removeProduct);
-      } catch (error) {
-        res.json({ message: error });
-      }
-};
+// this handle the delttion of the products
+module.exports.delete = function(req,res){
+    // this find the product by id and remove from the data base.
+    Product.findByIdAndRemove(req.params.id,(err)=>{
+        if(err){
+            return res.status(500).json({error:"product id not matched"})
+        }
+        return res.status(200).json({message:"product deleted"})
+    })  
+}
+
+
+
+// all the products will be retrun haere
+module.exports.update = function(req,res){
+    // findbyidandupdate(id,update,options,callback), here new:true  making return the updated product
+    Product.findByIdAndUpdate(req.params.id,{quantity:req.query.number},{new:true})
+    .then((product)=>{
+        // responding with new updated product.
+        return res.status(200).json({
+            product:{
+                id:product.id,
+                name:product.name,
+                quantity:product.quantity
+            },
+            message: "updated successfully"
+        })
+    }).catch(err=>{
+        return res.status(500).json({error:"error in server"})
+    })       
+}
