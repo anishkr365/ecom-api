@@ -1,4 +1,4 @@
-const Product = require('../models/Product')
+const Product = require('../models/product')
 module.exports.read_all = async(req,res) => {
     try{
         const products = await Product.find();
